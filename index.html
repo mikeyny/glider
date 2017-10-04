@@ -1,0 +1,353 @@
+<!--
+
+GDG[x] Glider based on
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+  <script src="js/leap.min.js"></script>
+  <script src="js/leapSwiper.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/images.png"></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/gdg_icon_128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  
+
+  <slide>
+    <hgroup>
+      <h2>What is gradle ?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Gradle is an open source, advanced general purpose build management system</li>
+        <li>Gradle supports the automatic download and configuration of dependencies or other libraries</li>
+        <li>It supports retrieving these dependencies from Maven and Ivy repositories .</li>
+        <li>Gradle supports multi-project and multi-artifact builds</li>
+        <li>It has built-in plugins for Java , Scala ,Groovy  and Kotlin (that i know of)</li>
+      </ul>
+    </article>
+  </slide>
+
+    <slide>
+      <hgroup>
+        <h2>Why Gradle ?</h2>
+      </hgroup>
+      <article>
+        <ul class="build fade">
+          <li><b>Declarative</b> - it much easier to read gradle files than maven or ant xml's</li>
+          <li><b>Flexible</b> - allows a lot of customization of build process</li>
+          <li><b>Open source</b> - licence: Apache</li>
+          <li><img src="images/gradle_users.png" width="75%" height="auto" alt=""></li>
+        </ul>
+      </article>
+    </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Gradle Introduction</h2>
+    </hgroup>
+    <article >
+      <ul>
+        <li>A Gradle build consists of one or more projects.</li>
+        <li>Projects can be something which should be built or something that should be done.</li>
+        <li>Each project consists of tasks.</li>
+        <li>A task represents a piece of work which a build performs, e.g., compile the source code or generate the Javadoc.</li>
+      </ul>
+      <ul class="build">
+        <li>
+          <h3>Sample Gradle Task</h3>
+          <pre class="prettyprint" data-lang="gradle">
+   <b>
+    task hello{
+      doFirst{
+        println "I am a sample task"
+      }
+    }
+         </b>
+        </pre>
+
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>The build.gradle file</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="build.gradle">
+group 'zw.co.afrosoft.parks'
+version '1.0.0'
+
+<b>apply plugin: 'java'</b>
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-csv:1.3'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+</pre>
+    </article>
+  </slide>
+
+
+<slide>
+  <hgroup>
+    <h2>Java Plugin Tasks</h2>
+  </hgroup>
+  <article>
+    <table>
+      <tr>
+        <th>Task Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>compileJava</td>
+        <td>JavaCompile</td>
+        <td>Compiles production Java source files using javac.</td>
+      </tr>
+      <tr>
+        <td  class="highlight">build</td>
+        <td>Task</td>
+        <td>Performs a full build of the project.</td>
+      </tr>
+      <tr>
+        <td>test</td>
+        <td>Test</td>
+        <td>Runs the unit tests using JUnit or TestNG.</td>
+      </tr>
+      <tr>
+        <td>javadoc</td>
+        <td>Javadoc</td>
+        <td>Generates API documentation for the production Java source, using Javadoc</td>
+      </tr>
+      <tr>
+        <td>clean</td>
+        <td>Delete</td>
+        <td>Deletes files created by specified task. cleanJar will delete the JAR file created by the jar task, and cleanTest will delete
+        the test results created by the test task.</td>
+      </tr>
+    </table>
+    <br>
+    <p>Further reading <br> <a href="https://docs.gradle.org/current/userguide/java_plugin.html">docs.gradle.org/current/userguide/java_plugin.html</a></p>
+  </article>
+</slide>
+
+    <slide>
+      <hgroup>
+        <h2>The build.gradle file</h2>
+      </hgroup>
+      <article>
+        <pre class="prettyprint" data-lang="build.gradle">
+group 'zw.co.afrosoft.parks'
+version '1.0.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+<b>repositories { 
+  mavenCentral() 
+  maven { 
+     url "https://maven.vas.co.zw/" 
+  }
+}</b>
+
+dependencies {
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'  //long form
+    compile 'org.apache.commons:commons-csv:1.3'  // short form
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile group: 'junit', name: 'junit', version: '4.12'       
+}
+</pre>
+      </article>
+    </slide>
+
+</pre>
+</article>
+</slide>
+
+<slide>
+  <hgroup>
+    <h2>The build.gradle file</h2>
+  </hgroup>
+  <article>
+    <pre class="prettyprint" data-lang="build.gradle">
+group 'zw.co.afrosoft.parks'
+version '1.0.0'
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+repositories { 
+  mavenCentral() 
+  maven { 
+     url "https://maven.vas.co.zw/" 
+  }
+}
+<b>dependencies {
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'  //long form
+    compile 'org.apache.commons:commons-csv:1.3'  // short form
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile group: 'junit', name: 'junit', version: '4.12'       
+}</b>
+
+</pre>
+  </article>
+</slide>
+
+  <slide>
+    <hgroup>
+      <h2>Maven VS Gradle</h2>
+    </hgroup>
+    <article class="smaller">
+      <h4>A depency in maven</h4><br>
+      <pre class="prettyprint" data-lang="maven">
+        <xmp>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot</artifactId>
+  <version>1.5.7.RELEASE</version>
+</dependency>
+</xmp>
+</pre>
+
+<h4>A depency in gradle</h4> <br>
+<pre class="prettyprint" data-lang="gradle">
+compile 'org.springframework.boot:spring-boot:1.5.7.RELEASE'
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Maven VS Gradle</h2>
+    </hgroup>
+    <article class="smaller">
+      <h4>A plugin in maven</h4><br>
+      <pre class="prettyprint" data-lang="maven">
+        <xmp>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>2.3.2</version>
+    </plugin>
+  </plugins>
+</build>
+</xmp>
+</pre>
+
+      <h4>A plugin in gradle</h4> <br>
+      <pre class="prettyprint" data-lang="gradle">
+apply plugin:'java'
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Installing Gradle</h2>
+    </hgroup>
+    <article>
+      <p>Instructions available at <a href="https://gradle.org/install/">gradle.org/install/</a> </p>
+
+      <iframe data-src="https://gradle.org/install/"></iframe>
+    </article>
+  </slide>
+
+ 
+
+  
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gdg_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>DEMO TIME !!!</h2>
+    </hgroup>
+  </slide>
+
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/gdg_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Thank You!&gt;</h2>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/gdg_logo_white.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
